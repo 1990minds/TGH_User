@@ -272,7 +272,6 @@ const SeatList = () => {
 
       </div>
 
-      {/* Right Column */}
       <div className="w-full lg:w-1/3 space-y-6">
 
 
