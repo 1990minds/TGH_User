@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.30bd7564.css",
+    "main.js": "/static/js/main.25377a34.js",
+    "static/js/453.8a341d83.chunk.js": "/static/js/453.8a341d83.chunk.js",
+    "static/media/hero.jpg": "/static/media/hero.ce27796727e5cc50e027.jpg",
+    "static/media/etios.png": "/static/media/etios.164398965987dfedc614.png",
+    "static/media/Tours.png": "/static/media/Tours.6920b952577bef1658c9.png",
+    "static/media/creta.jpeg": "/static/media/creta.2164058f08c3c207b538.jpeg",
+    "static/media/transport.png": "/static/media/transport.7f2c474bf8e829632deb.png",
+    "static/media/tgh.png": "/static/media/tgh.33e93b30aae0b012ae75.png",
+    "static/media/f8fa29b5-027c-4e02-93b5-8ecfaef9fb9a-removebg-preview.png": "/static/media/f8fa29b5-027c-4e02-93b5-8ecfaef9fb9a-removebg-preview.271ea6b0dc7557cc60c6.png",
+    "static/media/wrangler.jpeg": "/static/media/wrangler.cdfbc198f94ea2df102d.jpeg",
+    "static/media/lion.png": "/static/media/lion.4ac1158ec9da8eba8e91.png",
+    "static/media/delivery.png": "/static/media/delivery.0302250ce248dc77ad6a.png",
+    "static/media/resorts.png": "/static/media/resorts.6a4b2ac725ce72cdef5a.png",
+    "index.html": "/index.html",
+    "main.30bd7564.css.map": "/static/css/main.30bd7564.css.map",
+    "main.25377a34.js.map": "/static/js/main.25377a34.js.map",
+    "453.8a341d83.chunk.js.map": "/static/js/453.8a341d83.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.30bd7564.css",
+    "static/js/main.25377a34.js"
+  ]
+}
