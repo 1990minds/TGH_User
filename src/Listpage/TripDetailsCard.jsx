@@ -33,12 +33,12 @@ const TripDetailsCard = () => {
           <div className="space-y-1">
             <span className="text-gray-600 text-sm">From</span>
             <h3 className="text-2xl font-bold">{current_route?.from_location?.name}</h3>
-            <p className="text-gray-600">Indiranagar</p>
+            <p className="text-gray-600">{retrievedData?.pickupStreet}</p>
           </div>
           <div className="space-y-1">
             <span className="text-gray-600 text-sm">to</span>
             <h3 className="text-2xl font-bold">{current_route?.from_location?.name}</h3>
-            <p className="text-gray-600">ECR</p>
+            <p className="text-gray-600">{retrievedData?.dropStreet}</p>
           </div>
           <div className="space-y-4">
             <p className="text-lg">23/01/2025</p>

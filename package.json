@@ -1,5 +1,5 @@
 {
-  "name": "user-side",
+  "name": "tgh-user-side",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

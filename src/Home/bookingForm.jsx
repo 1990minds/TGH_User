@@ -108,7 +108,7 @@ export default function BookingForm({ className, buttonLabel = "Search for Cabs"
             {all_location
               .find((location) => location._id === formData.from)?.points
               ?.map((street) => (
-                <option key={street?._id} value={street?._id}>
+                <option key={street?.location} value={street?.location}>
                   {street?.location}
                 </option>
               ))}
@@ -145,7 +145,7 @@ export default function BookingForm({ className, buttonLabel = "Search for Cabs"
             {all_location
               .find((location) => location._id === formData.to)?.points
               ?.map((street) => (
-                <option key={street?._id} value={street?._id}>
+                <option key={street?.location} value={street?.location}>
                   {street?.location}
                 </option>
               ))}

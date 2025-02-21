@@ -22,7 +22,10 @@ const SeatList = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const { selected_route, current_route } = useSelector(routeSelector)
+  // const retrievedData = JSON.parse(localStorage.getItem('Selected Data'));
+  const [ride_date,set_ride_date]= useState();
   const selected_seats = []
+  const retrievedData = JSON.parse(localStorage.getItem('Selected Data'));
   useEffect(() => {
     const fetchVehicle = async () => {
       try {
@@ -35,6 +38,20 @@ const SeatList = () => {
     };
     fetchVehicle();
   }, [dispatch, vid]);
+
+  useEffect(()=>{
+   
+
+    const formattedDate = new Date(retrievedData?.date).toISOString();
+    console.log(formattedDate)
+    console.log(retrievedData?.date)
+    set_ride_date(formattedDate)
+
+
+
+  },[retrievedData])
+
+
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
@@ -73,105 +90,60 @@ const SeatList = () => {
     });
   };
   console.log(KeyUri)
-
-  // const handlePayment = async () => {
-
-  //   try {
-  //     selectedSeats?.forEach((seat) => selected_seats.push(seat.id));
-
-  //     const uniqueArr = [...new Set(selected_seats)];
-  //     console.log(uniqueArr)
-
-
-  //     const { data } = await axios.post(`${KeyUri.BACKEND_URI}/payment/create-order`, {
-  //       amount: totalAmount * 100,
-  //       mainPassenger,
-  //       passengers,
-  //       vehicle: current_vehicle?._id,
-  //       route: current_route?._id,
-  //       selectedSeats: uniqueArr,
-
-
-
-  //     });
-  //     console.log("data received from backend broh",data)
-  //     const options = {
-  //       key: process.env.REACT_APP_RAZORPAY_KEY_ID,
-  //       amount: data.amount,
-  //       currency: data.currency,
-  //       name: "The Great Himalayas",
-  //       description: "Test Transaction",
-  //       order_id: data.id,
-  //       handler: async function (response) {
-  //         alert(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
-
-  //         navigate('/sharedcabbookingconfirmed', { state: { paymentId: response.razorpay_payment_id } });
-  //       },
-  //       prefill: {
-  //         name: "",
-  //         email: "",
-  //         contact: "",
-  //       },
-  //       theme: {
-  //         color: "#3399CC",
-  //       },
-  //     };
-  //     const rzp = new window.Razorpay(options);
-  //     rzp.open();
-  //   } catch (error) {
-  //     console.error("Error in Razorpay payment:", error);
-  //   }
-  // };
   const handlePayment = async () => {
     try {
-      // Ensure selectedSeats is an array before processing
+
       const uniqueArr = [...new Set(selectedSeats?.map((seat) => seat.id) || [])];
       console.log("Unique Selected Seats:", uniqueArr);
-  
-      // Create order on the backend
+      console.log("ride deate in handle payment",ride_date)
+
       const { data } = await axios.post(`${KeyUri.BACKEND_URI}/payment/create-order`, {
-        amount: totalAmount * 100, // Ensure amount is in paise
+        amount: totalAmount * 100,
         mainPassenger,
         passengers,
         vehicle: current_vehicle?._id,
         route: current_route?._id,
         selectedSeats: uniqueArr,
+        ride_date_and_time:ride_date,
+        pickup_point:retrievedData?.pickupStreet,
+        drop_point:retrievedData?.dropStreet
+
       });
-  
+
       console.log("Data received from backend:", data);
-  
-      // Validate Razorpay key
+
+
       const razorpayKey = process.env.REACT_APP_RAZORPAY_KEY_ID;
       if (!razorpayKey) {
         console.error("Error: Razorpay Key is missing");
         alert("Payment gateway is not configured properly.");
         return;
       }
-  
-      // Razorpay payment options
+
+
       const options = {
         key: razorpayKey,
-        amount: data?.data?.amount, // Should be in paise
+        amount: data?.data?.amount,
         currency: data?.data?.currency,
         name: "The Great Himalayas",
         description: "Test Transaction",
-        order_id: data?.data?.id, // Razorpay order ID from backend
+        order_id: data?.data?.id,
         handler: async function (response) {
           alert(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
-          navigate('/sharedcabbookingconfirmed', { state: { paymentId: response.razorpay_payment_id } });
+          navigate('/sharedcabbookingconfirmed', { state: { paymentId: response.razorpay_payment_id, rideid:data?.dataa?._id } });
         },
         prefill: {
-          name: "",
-          email: "",
-          contact: "",
+          name: passengers[mainPassenger]?.name || "",
+          email: passengers[mainPassenger]?.email || "",
+          contact: passengers[mainPassenger]?.phone || "",
         },
         theme: {
           color: "#3399CC",
         },
       };
-  
+
       console.log("Razorpay Options:", options);
-  
+
       // Open Razorpay payment window
       const rzp = new window.Razorpay(options);
       rzp.open();
@@ -180,7 +152,7 @@ const SeatList = () => {
       alert("Payment failed. Please try again.");
     }
   };
-  
+
 
 
 
@@ -219,7 +191,11 @@ const SeatList = () => {
 
   if (loading) return <div className="text-center py-8">Loading...</div>;
   if (!current_vehicle) return <div className="text-center py-8">Vehicle not found</div>;
+ 
 
+  const formattedDate = new Date(retrievedData?.date).toISOString();
+  console.log(formattedDate)
+  console.log(retrievedData?.date)
   return (
     <div className="mx-auto flex flex-col lg:flex-row gap-8 p-4 max-w-7xl mb-14">
       <TripDetailsCard vehicle={current_vehicle} />
