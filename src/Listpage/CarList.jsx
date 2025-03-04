@@ -241,9 +241,9 @@ const CarList = () => {
 
 
                   <div className="flex flex-col items-center md:items-end justify-between text-center md:text-right mt-4 md:mt-0">
-                    <p className="text-gray-900 font-bold text-xs sm:text-base">
+                    {/* <p className="text-gray-900 font-bold text-xs sm:text-base">
                       Seats Left: {car?.seats?.length}
-                    </p>
+                    </p> */}
                     <p className="text-xl sm:text-2xl font-bold text-green-500">₹{(current_route?.no_of_kms) * 25}/-</p>
 
                     <Link to={`/Seats/${car?._id}`}>

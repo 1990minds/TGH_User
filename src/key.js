@@ -1,7 +1,7 @@
 
 const KeyUri = {
-    // BACKEND_URI : "http://localhost:5000/api"
-     BACKEND_URI:"https://stingray-app-zzl7k.ondigitalocean.app/api"
+    BACKEND_URI : "http://localhost:5000/api"
+    //  BACKEND_URI:"https://stingray-app-zzl7k.ondigitalocean.app/api"
     
 
 }
