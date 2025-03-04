@@ -60,7 +60,7 @@ export default function App() {
 
   return (
     <>
-      <div>{isMobile ? <Head /> : <Navbar />}</div>
+      <div>{isMobile ? <Head /> : < Navbar  />}</div>
       <div>
         <Routes>
           <Route path="/" element={<IndexHomemobile />} />
